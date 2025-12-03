@@ -1,0 +1,20 @@
+/home/mauricio/.stack/programs/x86_64-linux/ghc-tinfo6-9.2.7/lib/ghc-9.2.7/include/ghcversion.h:
+  hash: d590b76d2d5f98f01894882dc106d920a101f52edb6a09b9a7f8dc701b075565
+? /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/dist/x86_64-linux-tinfo6/ghc-9.2.7/build/defiende/autogen/Paths_defiende_la_torre.hs
+: hash: 48286f355ff3c9bb6abcf70bebd0d7c6238600433f0cd2935f433deec46a37a2
+? /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/dist/x86_64-linux-tinfo6/ghc-9.2.7/build/defiende/autogen/cabal_macros.h
+: hash: c7e026c52097029c2adfc619fcd3919eb1d9dce9cad8c107bf3ee7efd4c912c4
+/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/defiende-la-torre.cabal:
+  hash: f9e7010a5529cde619c4d5de7e6e44dad078bff06e01a1dede4cbb597505ae56
+/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/package.yaml:
+  hash: 71c9d85d1bd5069065520722c7cccadd7ec6c96c6179e5d252aed62b1d27d136
+/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Generador.hs:
+  hash: ec1daf669df7c8e117ce4219f0d51cc0a9636d55c49564c840f484ef63f1ec5e
+/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Main.hs:
+  hash: 4bd3f7cb5d9efcb4acdbc6f00ec432fdd013125d1ddbfe1bc6f171613a17d94e
+/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Simulacion.hs:
+  hash: 4e8e69bdfa22ce925b25c262ac9b5db0886608f9ced3514bbd20ed78faafd0ff
+/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Tipos.hs:
+  hash: 1c702eb1b884905b811e51d3954b50ad0e12ff8f3b27ba9774072b80ad6ddc6d
+/usr/include/stdc-predef.h:
+  hash: cb08cd5d4cc059a90833ac48a284d25016e8d56ded8ad4cd98d8ac59cc5053f3
