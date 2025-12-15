@@ -1,16 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-visualizador.py — Start con video fullscreen + 2 botones (Jugar / Acerca de)
-y panel lateral estilo "Clash Royale". Todo lo demás queda igual:
-música/SFX, mira, bombas, lógica de juego, etc.
-
-Requiere:
-- assets/video/video1.mp4 (video de inicio)
-- assets/audio/* (intro, conteo, fondo, disparo_bomba, perder, ganar)
-
-Si OpenCV no está instalado, el video se reemplaza por fondo negro con mensaje.
-"""
+#JOSE MAURICIO OSORIO ROJAS
 
 import os, sys, json, time, math, threading, queue, subprocess, random
 import pygame
