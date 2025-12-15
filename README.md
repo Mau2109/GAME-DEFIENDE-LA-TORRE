@@ -1,92 +1,115 @@
 # 🏰 Defiende la Torre
 
-Juego **Tower Defense** desarrollado con **Haskell** (lógica funcional del motor) y **Python/Pygame** (interfaz gráfica e interacción), demostrando cómo la programación funcional puede controlar dinámicamente un juego de estrategia en tiempo real.
+Juego **Tower Defense** de próxima generación desarrollado con **Haskell** (motor de simulación funcional) y **Python/Pygame** (interfaz visual moderna), demostrando cómo la programación funcional puede controlar dinámicamente un juego de estrategia en tiempo real con gráficos avanzados.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Haskell-5D4F85?style=for-the-badge&logo=haskell&logoColor=white" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/Pygame-00599C?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" />
 </p>
 
 ---
 
 ## 📋 Descripción del Proyecto
 
-**Defiende la Torre** es un videojuego tipo tower defense donde:
-- El **motor del juego** está implementado en **Haskell** (70%), utilizando principios de programación funcional como recursión, funciones puras, composición y evaluación perezosa.
-- La **interfaz gráfica** está desarrollada en **Python con Pygame** (30%), encargándose de la visualización, renderizado y manejo de eventos del usuario.
-- La comunicación entre ambos lenguajes se realiza mediante **sockets TCP** intercambiando mensajes **JSON**.
+**Defiende la Torre** es un videojuego tipo tower defense de alta calidad donde:
+- El **motor del juego** está implementado en **Haskell**, utilizando principios de programación funcional como recursión, funciones puras, composición y evaluación perezosa.
+- La **interfaz gráfica moderna** está desarrollada en **Python con Pygame**, incluyendo sistema de partículas, efectos visuales avanzados (glow, explosiones, proyectiles animados) y diseño estilo Clash Royale.
+- La comunicación entre ambos lenguajes se realiza mediante **JSON por stdin/stdout**, permitiendo una integración fluida y robusta.
 
-El mapa, las oleadas de enemigos y los patrones de ataque se generan de forma **procedural y funcional**, mostrando cómo un enfoque declarativo puede controlar dinámicamente la lógica de un juego de estrategia.
+El juego incluye **menú cinematográfico con video fullscreen**, **artillería táctica con disparo manual**, **sistema de audio dinámico** y **efectos visuales de última generación** que crean una experiencia inmersiva y profesional.
 
 ---
 
 ## ✨ Características Principales
 
-### 🎮 Jugabilidad
-- **Generación procedural de caminos** usando algoritmos fractales (Curva del Dragón)
-- **4 tipos de torres** con características únicas:
-  - 🔵 **Básica**: Daño medio, cadencia equilibrada (100💰)
-  - 🎯 **Francotirador**: Alto daño, largo alcance (150💰)
-  - ❄️ **Congelación**: Ralentiza enemigos (120💰)
-  - 💥 **Explosiva**: Daño en área (180💰)
-- **4 tipos de enemigos** con diferentes estadísticas:
-  - 🔴 **Normal**: Equilibrado
+### 🎮 Jugabilidad Avanzada
+- **4 tipos de torres** con roles especializados:
+  - 🏹 **Arquera**: Ataque rápido de bajo costo (40💰)
+  - 💣 **Cañón**: Daño medio, cadencia equilibrada (60💰)
+  - 🔮 **Mago**: Ataque mágico con ralentización (80💰)
+  - 🎯 **Artillería**: Disparo manual táctico con explosiones de área (120💰)
+- **4 tipos de enemigos** con características únicas:
+  - 🔴 **Normal**: Equilibrado y básico
   - 💨 **Rápido**: Veloz pero frágil
-  - 🛡️ **Tanque**: Lento pero resistente
+  - 🛡️ **Tanque**: Lento pero muy resistente
   - 🦅 **Volador**: Rápido con vida media
-- **Sistema de oleadas progresivas** con dificultad incremental
-- **Sistema económico**: Gana oro eliminando enemigos, gasta oro colocando torres
-- **Detección de colisiones** y sistema de proyectiles
+- **Sistema de artillería interactivo**: Click en torre → Click en mapa para disparo dirigido
+- **Oleadas automáticas** cada 5 segundos con contador visual
+- **Objetivo de victoria**: Eliminar 200 enemigos
+- **Sistema económico**: Gana monedas eliminando enemigos
+- **Detección inteligente de colisiones** para Game Over cuando enemigo alcanza la base
 
-### 🎨 Interfaz Gráfica Mejorada
-- Fondo degradado tipo cielo
-- Patrón de césped animado
-- Camino procedural con sombras y efectos visuales
-- Torres con animaciones de disparo y cooldown
-- Enemigos con diferentes colores según tipo
-- Barras de vida coloridas (verde→amarillo→rojo)
-- Preview de torre antes de colocar (muestra rango)
-- HUD completo con estadísticas en tiempo real
-- Efectos visuales para portales de inicio y fin
+### 🎨 Interfaz Visual de Próxima Generación
+- **Menú de inicio cinematográfico** con video fullscreen en loop y dos botones estilizados
+- **Panel lateral estilo Clash Royale** con diseño moderno de chips informativos y cards
+- **Sistema de partículas** para efectos de colocación, explosiones y disparos
+- **Efectos de iluminación (glow)** pulsantes en portales, torres y proyectiles
+- **Glassmorphism** en elementos UI con transparencias y bordes sutiles
+- **Countdown 3-2-1** con diseño visual impactante en rojo antes de iniciar
+- **Proyectiles de artillería** con estela de humo animada, rotación y sombra dinámica
+- **Explosiones multicapa** con escala progresiva, fade out y ondas de choque
+- **Camino verde texturizado** con flujo animado, flechas direccionales y ruido procedural
+- **Arena construible** con variaciones de color y detección de adyacencia al camino
+- **Barras de vida modernas** con gradientes, segmentación visual y colores según estado
+- **Sprites de alta calidad** (60x60px a 100x100px) para torres, enemigos, portales y efectos
+- **Efecto visual de slow** con aura azul pulsante en enemigos ralentizados
+- **Sombras suaves** bajo todos los objetos para profundidad
+- **Ghost tower** con indicador verde/rojo para validación de colocación
+- **Crosshair dinámico** con pulso para modo artillería
+- **Banners animados** para oleadas con fade in/out
+- **Píldora flotante** mostrando oleada actual y enemigos vivos
 
-### 🔧 Arquitectura Funcional
+### 🎵 Sistema de Audio Dinámico
+- **6 pistas musicales** con transiciones automáticas:
+  - `intro.mp3`: Música ambiental del menú
+  - `conteo.mp3`: Audio sincronizado con countdown 3-2-1
+  - `fondo.mp3`: Música durante gameplay en loop
+  - `perder.mp3`: Audio emocional al perder
+  - `ganar.mp3`: Música de victoria
+- **Efectos de sonido (SFX)**:
+  - `disparo_bomba.mp3`: Efecto al disparar artillería con sensación táctica
+- Transiciones fluidas según estado del juego (menú → countdown → gameplay → fin)
+
+### 🔧 Arquitectura Funcional Robusta
 - **Motor en Haskell**:
-  - Generación procedural de caminos (`PathGeneration.hs`)
-  - Sistema de movimiento de enemigos (`EnemyMovement.hs`)
-  - Sistema de oleadas (`WaveSystem.hs`)
-  - Sistema de torres y disparo (`TowerSystem.hs`)
-  - Sistema de proyectiles y colisiones (`ProjectileSystem.hs`)
-  - Servidor de red con JSON (`NetworkServer.hs`)
+  - Tipos de datos inmutables (`Tipos.hs`)
+  - Sistema de simulación paso a paso (`Simulacion.hs`)
+  - Generación procedural de mapas (`Generador.hs`)
+  - Serialización JSON completa con Aeson
+  - Comunicación por stdin/stdout con Python
 - **Cliente en Python**:
-  - Renderizado con Pygame
-  - Manejo de eventos y entrada del usuario
-  - Comunicación por sockets TCP
-  - Interfaz gráfica responsiva
+  - Renderizado 60 FPS con Pygame
+  - Sistema de partículas procedurales
+  - Manejo robusto de eventos y entrada
+  - Reproductor de video con OpenCV (cv2)
+  - Interfaz responsiva y adaptativa
 
 ---
 
 ## 🛠️ Tecnologías Utilizadas
 
 ### Lenguajes y Frameworks
-- **Haskell** (GHC 8.8.4+) - Motor del juego
-- **Python 3.10+** - Cliente gráfico
-- **Pygame** - Renderizado y manejo de eventos
+- **Haskell** (Stack) - Motor funcional del juego
+- **Python 3.10+** - Cliente gráfico avanzado
+- **Pygame 2.5+** - Renderizado y efectos visuales
+- **OpenCV (cv2)** - Reproducción de video fullscreen
 
 ### Bibliotecas Haskell
 ```yaml
 dependencies:
-  - base >= 4.12 && < 4.15
+  - base >= 4.12
   - aeson                    # Serialización JSON
-  - bytestring              # Manejo de datos binarios
-  - network                 # Comunicación por sockets
-  - containers              # Estructuras de datos
-  - linear                  # Operaciones vectoriales
+  - bytestring              # Manejo eficiente de datos
+  - containers              # Estructuras de datos funcionales
+  - text                    # Manipulación de texto
 ```
 
 ### Bibliotecas Python
 ```bash
 pygame>=2.5.0
+opencv-python>=4.8.0      # Para video del menú (opcional)
 ```
 
 ---
@@ -96,17 +119,21 @@ pygame>=2.5.0
 ```
 defiende-la-torre/
 ├── src/
-│   ├── Types.hs              # Tipos de datos del juego
-│   ├── PathGeneration.hs     # Generación procedural de caminos
-│   ├── EnemyMovement.hs      # Lógica de movimiento de enemigos
-│   ├── WaveSystem.hs         # Sistema de oleadas
-│   ├── TowerSystem.hs        # Sistema de torres y disparo
-│   ├── ProjectileSystem.hs   # Sistema de proyectiles
-│   ├── NetworkServer.hs      # Servidor TCP con JSON
-│   └── MainServer.hs         # Punto de entrada del servidor
-├── game_client.py            # Cliente Pygame (interfaz gráfica)
+│   ├── Tipos.hs              # Tipos de datos del juego (Estado, Torres, Enemigos)
+│   ├── Simulacion.hs         # Lógica de simulación y actualización por tick
+│   ├── Generador.hs          # Generación procedural de mapas y oleadas
+│   └── Main.hs               # Punto de entrada del motor Haskell
+├── assets/
+│   ├── audio/                # Música y efectos de sonido (6 archivos)
+│   ├── towers/               # Sprites de torres (4 tipos)
+│   ├── enemies/              # Sprites de enemigos (4 variantes)
+│   ├── effects/              # Sprites de bombas y explosiones
+│   ├── ui/                   # Portal verde y castillo rojo
+│   └── video/                # Video de intro (video1.mp4)
+├── vizualizador.py           # Cliente Pygame con interfaz completa
 ├── defiende-la-torre.cabal   # Configuración de Cabal
-├── stack.yaml               # Configuración de Stack (opcional)
+├── stack.yaml               # Configuración de Stack
+├── package.yaml             # Configuración alternativa
 └── README.md                # Este archivo
 ```
 
@@ -116,59 +143,45 @@ defiende-la-torre/
 
 ### Prerrequisitos
 
-1. **Haskell Stack o Cabal**
+1. **Haskell Stack**
    ```bash
    # Ubuntu/Debian
-   sudo apt-get install haskell-stack
+   curl -sSL https://get.haskellstack.org/ | sh
    
    # macOS
    brew install haskell-stack
    
-   # O instalar Cabal directamente
-   sudo apt-get install cabal-install ghc
+   # Verificar instalación
+   stack --version
    ```
 
-2. **Python y Pygame**
+2. **Python 3.10+ y dependencias**
    ```bash
-   # Instalar Python 3.10+
+   # Ubuntu/Debian
    sudo apt-get install python3 python3-pip
    
-   # Instalar Pygame
-   pip3 install pygame
+   # Instalar librerías Python
+   pip3 install pygame opencv-python
    ```
 
 ### Compilación y Ejecución
-
-#### Opción 1: Usando Cabal
 
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/defiende-la-torre.git
 cd defiende-la-torre
 
-# 2. Compilar el servidor Haskell
-cabal update
-cabal build
-
-# 3. En una terminal, ejecutar el servidor
-cabal run
-
-# 4. En otra terminal, ejecutar el cliente Python
-python3 game_client.py
-```
-
-#### Opción 2: Usando Stack
-
-```bash
-# 1. Compilar con Stack
+# 2. Compilar el motor Haskell
 stack build
 
-# 2. Ejecutar el servidor
-stack run
-
-# 3. En otra terminal, ejecutar el cliente
-python3 game_client.py
+# 3. Ejecutar el juego completo (lanza automáticamente motor + interfaz)
+python3 vizualizador.py
 ```
+
+El visualizador se encarga de:
+- Iniciar el proceso del motor Haskell automáticamente
+- Establecer comunicación bidireccional por stdin/stdout
+- Mostrar el menú con video y manejar toda la interfaz gráfica
 
 ---
 
@@ -178,137 +191,280 @@ python3 game_client.py
 
 | Tecla/Acción | Función |
 |--------------|---------|
-| **Click Izquierdo** | Colocar torre en la posición del cursor |
-| **ESPACIO** | Iniciar oleada de enemigos |
-| **1** | Seleccionar Torre Básica (100💰) |
-| **2** | Seleccionar Torre Francotirador (150💰) |
-| **3** | Seleccionar Torre Congelación (120💰) |
-| **4** | Seleccionar Torre Explosiva (180💰) |
-| **ESC** | Salir del juego |
+| **Click en "Comenzar"** | Iniciar partida desde menú de video |
+| **Click en "Acerca de"** | Ver instrucciones y controles |
+| **1** | Seleccionar Torre Arquera (40💰) |
+| **2** | Seleccionar Torre Cañón (60💰) |
+| **3** | Seleccionar Torre Mago (80💰) |
+| **4** | Seleccionar Torre Artillería (120💰) |
+| **Click Izquierdo (arena)** | Colocar torre seleccionada |
+| **Click en Artillería** | Activar modo de disparo manual |
+| **Click en mapa (artillería activa)** | Disparar a la posición indicada |
+| **ESPACIO/ENTER (menú)** | Iniciar juego |
+| **A (menú)** | Toggle panel "Acerca de" |
+| **R** | Reiniciar partida (victoria/derrota) |
+| **Q / ESC** | Salir del juego |
 
 ### Objetivo del Juego
 
-- **Defender tu base** del ataque de oleadas de enemigos
-- **Colocar torres estratégicamente** para eliminar enemigos antes de que lleguen al final
-- **Administrar tu oro** para construir torres efectivas
-- **Sobrevivir el mayor número de oleadas** posible
+- **Defender tu castillo rojo** del ataque de oleadas automáticas
+- **Colocar torres estratégicamente** en celdas de arena (desierto)
+- **Eliminar 200 enemigos** para alcanzar la victoria
+- **No dejar que ningún enemigo** alcance el castillo (Game Over instantáneo)
 
-### Consejos Estratégicos
+### Estrategias Avanzadas
 
-1. 🎯 **Coloca torres al inicio del camino** para maximizar el tiempo de disparo
-2. 💰 **Administra tu oro sabiamente** - no coloques todas las torres al inicio
-3. 🔄 **Combina diferentes tipos de torres** para efectividad máxima
-4. ❄️ **Usa torres de congelación** para ralentizar enemigos tanque
-5. 💥 **Torres explosivas** son efectivas contra grupos de enemigos
+1. 🎯 **Coloca Arqueras al inicio** para maximizar tiempo de disparo
+2. 💰 **Administra monedas sabiamente** - equilibra cantidad vs calidad
+3. 🔄 **Combina tipos de torres** para cobertura completa del camino
+4. ❄️ **Usa Magos estratégicamente** para ralentizar enemigos Tanque
+5. 💥 **La Artillería es táctica** - úsala para eliminar grupos concentrados
+6. 🏹 **Prioriza cobertura** sobre poder individual al inicio
+7. 🎯 **Observa el countdown de oleadas** para preparar defensas
 
 ---
 
 ## 🔧 Configuración Avanzada
 
-### Modificar parámetros del juego
+### Modificar estadísticas de torres
 
-En `src/Types.hs` puedes ajustar:
+En `src/Tipos.hs` o `src/Simulacion.hs`:
 ```haskell
-initialGameState :: Path -> GameState
-initialGameState path =
-  GameState
-    { gsLives = 20        -- Vidas iniciales
-    , gsGold = 200        -- Oro inicial
-    , gsWave = 1          -- Oleada inicial
-    -- ...
-    }
+-- Costos de torres
+costTorre :: TipoTorre -> Int
+costTorre Arquera = 40
+costTorre Canon = 60
+costTorre Mago = 80
+costTorre Artilleria = 120
+
+-- Estadísticas de torres
+rangoTorre :: TipoTorre -> Double
+damageTorre :: TipoTorre -> Int
+cooldownTorre :: TipoTorre -> Double
 ```
 
-En `src/WaveSystem.hs` puedes modificar:
-```haskell
-enemyStats :: EnemyType -> (Health, Double, Gold)
-enemyStats Normal = (50, 30.0, 10)   -- HP, Velocidad, Recompensa
-enemyStats Fast = (30, 60.0, 15)
-enemyStats Tank = (150, 15.0, 25)
-enemyStats Flying = (40, 50.0, 20)
+### Ajustar parámetros visuales
+
+En `vizualizador.py`:
+```python
+# Tamaño de celda base
+CELL = 40
+
+# Intervalo entre oleadas (segundos)
+WAVE_INTERVAL = 5.0
+
+# FPS del juego
+FPS = 60
+
+# Objetivo de victoria
+VICTORY_KILLS = 200
 ```
 
-En `src/TowerSystem.hs` puedes ajustar:
-```haskell
-towerCost :: TowerType -> Int
-towerCost Basic  = 100
-towerCost Sniper = 150
-towerCost Freeze = 120
-towerCost Splash = 180
-```
+### Cambiar assets gráficos
 
-### Cambiar el tipo de camino
-
-En `src/PathGeneration.hs`, línea 11:
-```haskell
--- Usar curva del dragón (complejo)
-generatePath level = normalizePath $ generateDragonCurve level
-
--- O usar camino simple (para debugging)
-generatePath level = generateSimplePath level
-```
+Reemplaza los archivos en `assets/` manteniendo nombres y dimensiones:
+- Torres: 60x60px PNG con transparencia
+- Enemigos: 40x40px PNG con transparencia
+- Efectos: Tamaños variables según tipo
+- Video: MP4 compatible con OpenCV
 
 ---
 
 ## 🌐 Protocolo de Comunicación JSON
 
-### Comandos Cliente → Servidor
+### Comandos Cliente → Servidor (stdin)
 
+**Colocar Torre:**
 ```json
 {
-  "type": "PlaceTower",
-  "cmdX": 150.5,
-  "cmdY": 200.3,
-  "cmdType": "Sniper"
+  "cmd": "colocar_torre",
+  "pos": [15, 8],
+  "tipo": "mago"
 }
 ```
 
+**Disparar Artillería:**
 ```json
 {
-  "type": "StartWave"
+  "cmd": "disparar_artilleria",
+  "id_torre": 5,
+  "objetivo": [20.5, 12.3]
 }
 ```
 
+**Iniciar Oleada:**
 ```json
 {
-  "type": "Tick",
-  "cmdDeltaTime": 0.016
+  "cmd": "iniciar_oleada"
 }
 ```
 
-### Estado Servidor → Cliente
+**Actualizar Tick:**
+```json
+{
+  "cmd": "noop"
+}
+```
+
+### Estado Servidor → Cliente (stdout)
 
 ```json
 {
-  "rspPath": [[100, 80], [150, 80], ...],
-  "rspEnemies": [
+  "ejCamino": [[1, 9], [2, 9], [3, 9], ...],
+  "ejEntrada": [1, 9],
+  "ejBase": [26, 9],
+  "ejEnemigos": [
     {
-      "edId": 1,
-      "edType": "Normal",
-      "edX": 150.5,
-      "edY": 200.3,
-      "edHP": 45,
-      "edMaxHP": 50
+      "idEnemigo": 1,
+      "tipo": "Normal",
+      "posX": 5.45,
+      "posY": 9.0,
+      "hpEnemigo": 80,
+      "hpMax": 100,
+      "efecto": "none"
     }
   ],
-  "rspTowers": [
+  "ejTorres": [
     {
-      "tdX": 300,
-      "tdY": 200,
-      "tdType": "Sniper",
-      "tdLevel": 1,
-      "tdCooldown": 15,
-      "tdRange": 250,
-      "tdDamage": 50
+      "idTorre": 1,
+      "posTorre": [10, 5],
+      "tipo": "Arquera",
+      "rango": 3.5,
+      "hpTorre": 100,
+      "hpMaxTorre": 100
     }
   ],
-  "rspProjectiles": [...],
-  "rspLives": 18,
-  "rspMoney": 350,
-  "rspWaveNumber": 3,
-  "rspWaveActive": true
+  "ejProyectiles": [
+    {
+      "posX": 15.2,
+      "posY": 8.7,
+      "destinoX": 18.0,
+      "destinoY": 9.0,
+      "progreso": 0.65,
+      "radioExplosion": 2.0
+    }
+  ],
+  "ejMonedas": 340,
+  "ejVidaBase": 20,
+  "ejTick": 1523,
+  "ejMaxTorres": 15,
+  "ejGameOver": false
 }
 ```
+
+---
+
+## 🎨 Sistema de Efectos Visuales
+
+### Partículas Procedurales
+```python
+class ParticleSystem:
+    def emit(x, y, count, color, velocity_range, size_range, lifetime)
+    def update(dt)
+    def draw(surface)
+```
+
+Usos:
+- Colocación de torres (15 partículas verdes)
+- Disparos de artillería (10 partículas amarillas/doradas)
+- Explosiones (partículas radiales con fade out)
+
+### Sistema de Glow (Resplandor)
+```python
+def _draw_glow(surf, cx, cy, radius, color, intensity):
+    # Dibuja 3 capas de círculos concéntricos con alpha decreciente
+```
+
+Aplicado a:
+- Portales (verde pulsante)
+- Base (rojo constante)
+- Torres (color según tipo, suave)
+
+### Animaciones Principales
+- **Flujo del camino**: Flechas que se mueven continuamente
+- **Proyectiles**: Rotación, estela de humo, sombra dinámica
+- **Explosiones**: Escala progresiva, múltiples ondas, fade out
+- **Selección de artillería**: Anillo pulsante con breathing effect
+- **Countdown**: Números grandes con borde rojo impactante
+
+---
+
+## 📝 Principios de Programación Funcional Aplicados
+
+### 🔹 Funciones Puras
+Toda la lógica del juego es determinista:
+```haskell
+actualizarEnemigos :: Double -> Estado -> Estado
+moverEnemigo :: Enemigo -> Camino -> Enemigo
+```
+
+### 🔹 Inmutabilidad
+El estado nunca se modifica, siempre se crea uno nuevo:
+```haskell
+estado { ejEnemigos = nuevosEnemigos, ejMonedas = nuevasMonedas }
+```
+
+### 🔹 Composición de Funciones
+La simulación se construye componiendo transformaciones:
+```haskell
+tick dt = actualizarProyectiles 
+        . dispararTorres 
+        . moverEnemigos dt
+```
+
+### 🔹 Recursión
+Procesamiento de listas sin bucles imperativos:
+```haskell
+foldr procesarEnemigo estadoInicial listaEnemigos
+```
+
+### 🔹 Pattern Matching
+Manejo expresivo de diferentes casos:
+```haskell
+case comando of
+  ColocarTorre pos tipo -> ...
+  DispararArtilleria id obj -> ...
+  IniciarOleada -> ...
+```
+
+---
+
+## 🐛 Solución de Problemas
+
+### El visualizador no inicia el motor
+```bash
+# Verificar que stack esté instalado
+stack --version
+
+# Compilar explícitamente
+stack build
+
+# Verificar el ejecutable
+stack exec which defiende
+```
+
+### No se reproduce el video del menú
+```bash
+# Instalar OpenCV (opcional, fallback a pantalla negra)
+pip3 install opencv-python
+
+# Si persiste, el juego usará fondo negro con mensaje
+```
+
+### Pantalla negra después del countdown
+- Esperar 1-2 segundos, el estado inicial puede tardar
+- Verificar en terminal si hay errores del motor Haskell
+- Presionar ESPACIO para forzar primera oleada
+
+### Audio no se escucha
+- Verificar que los archivos en `assets/audio/` existan
+- Verificar volumen del sistema
+- El juego funciona sin audio si faltan archivos
+
+### Torres no disparan
+- Las torres tienen cooldown (0.6-1.0 segundos)
+- Enemigos deben estar dentro del rango (círculo visible con artillería)
+- Verificar que la torre tenga vida (barra circular)
 
 ---
 
@@ -316,118 +472,81 @@ generatePath level = generateSimplePath level
 
 Este proyecto utilizó asistencia de IA generativa para:
 
-- ✅ Diseñar la estructura funcional del motor de oleadas
-- ✅ Optimizar algoritmos de generación procedural de caminos
-- ✅ Implementar el protocolo de comunicación JSON entre Haskell y Python
-- ✅ Mejorar el diseño visual de la interfaz gráfica
-- ✅ Generar ideas para mecánicas de juego y balanceo
+✅ **Arquitectura del motor funcional** en Haskell con tipos inmutables  
+✅ **Sistema de comunicación JSON** bidireccional robusto  
+✅ **Diseño del sistema de partículas** procedurales en Python  
+✅ **Implementación de efectos visuales** (glow, explosiones, proyectiles)  
+✅ **Optimización del renderizado** para 60 FPS estables  
+✅ **Diseño de interfaz** estilo Clash Royale con glassmorphism  
+✅ **Sistema de audio dinámico** con transiciones automáticas  
+✅ **Balanceo de mecánicas** de juego y estadísticas  
 
-### Ejemplos de prompts utilizados:
-- *"Crea en Haskell una función pura que genere un patrón fractal de caminos para un juego tipo tower defense"*
-- *"Modela en Haskell una estructura de datos inmutable para representar el estado de cada torre y enemigo"*
-- *"Convierte el estado funcional del juego en un JSON interpretable por Pygame"*
-
----
-
-## 📝 Principios de Programación Funcional Aplicados
-
-### 🔹 Funciones Puras
-Todas las funciones de la lógica del juego son deterministas y sin efectos secundarios:
-```haskell
-moveEnemyAlongPath :: Double -> Path -> Enemy -> Enemy
-updateProjectiles :: GameState -> GameState
-```
-
-### 🔹 Inmutabilidad
-El estado del juego nunca se modifica directamente, siempre se crean nuevas versiones:
-```haskell
-state { gsEnemies = newEnemies, gsGold = newGold }
-```
-
-### 🔹 Composición de Funciones
-La lógica del juego se construye componiendo funciones simples:
-```haskell
-updateGame dt = updateProjectiles . updateTowers . moveEnemies dt
-```
-
-### 🔹 Recursión
-Se usa recursión en lugar de loops para procesar listas:
-```haskell
-foldr (moveEnemy dt path) ([], 0) enemies
-```
-
-### 🔹 Evaluación Perezosa
-Las listas infinitas y generación procedural aprovechan lazy evaluation:
-```haskell
-generateDragonCurve :: Int -> Path
-```
-
----
-
-## 🐛 Solución de Problemas
-
-### El servidor no inicia
-```bash
-# Limpiar y reconstruir
-cabal clean
-cabal build
-```
-
-### El cliente no se conecta
-- Verificar que el servidor esté corriendo en el puerto 3000
-- Verificar que no haya firewall bloqueando el puerto
-- Intentar con `localhost` o `127.0.0.1`
-
-### No se ven los gráficos correctamente
-```bash
-# Reinstalar Pygame
-pip3 uninstall pygame
-pip3 install pygame --upgrade
-```
-
-### Errores de compilación en Haskell
-```bash
-# Actualizar dependencias
-cabal update
-cabal install --only-dependencies
-```
+### Prompts clave utilizados:
+- *"Implementa en Haskell un sistema de torres con cooldown y detección de rango usando funciones puras"*
+- *"Crea un sistema de partículas en Pygame con física básica (velocidad, gravedad, fade out)"*
+- *"Diseña un protocolo JSON para comunicar estado de juego desde Haskell a Python via stdin/stdout"*
+- *"Implementa efectos de glow pulsantes en Pygame usando superficies con alpha"*
 
 ---
 
 ## 📚 Recursos y Referencias
 
 - [Documentación de Haskell](https://www.haskell.org/documentation/)
-- [Pygame Documentation](https://www.pygame.org/docs/)
+- [Stack - Herramienta de construcción](https://docs.haskellstack.org/)
 - [Aeson - JSON en Haskell](https://hackage.haskell.org/package/aeson)
-- [Network.Socket](https://hackage.haskell.org/package/network)
+- [Pygame Documentation](https://www.pygame.org/docs/)
+- [OpenCV Python](https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html)
 - [Programación Funcional en Juegos](https://wiki.haskell.org/Game_Development)
 
 ---
 
 ## 👨‍💻 Autor
 
-**Mauricio** - Proyecto de Programación Funcional
-
-Universidad Tecnologica de la Mixteca - Séptimo Semestre
+**Jose Mauricio Osorio Rojas**  
+Proyecto Final de Programación Funcional  
+Universidad Tecnológica de la Mixteca - Séptimo Semestre  
+Profesor: Dr. Manuel Hernandez Gutierrez
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia BSD-3-Clause. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
 ---
 
-## 🎯 Trabajo Futuro
+## 🎯 Características Futuras Planeadas
 
 - [ ] Sistema de mejora de torres (upgrades)
-- [ ] Más tipos de torres y enemigos
-- [ ] Efectos de sonido y música
-- [ ] Sistema de puntuación y leaderboard
-- [ ] Multijugador cooperativo
-- [ ] Guardar/cargar partidas
+- [ ] Más variedades de enemigos con habilidades especiales
+- [ ] Mapas procedurales con diferentes dificultades
+- [ ] Sistema de logros y estadísticas persistentes
+- [ ] Modo desafío con condiciones especiales
 - [ ] Editor de mapas personalizado
-- [ ] Achievements y desafíos diarios
+- [ ] Replay system para revisar partidas
+- [ ] Leaderboard local con mejores puntuaciones
+
+---
+
+## 🎮 Capturas de Pantalla
+
+### Menú de Inicio
+- Video fullscreen en loop
+- Botones "Comenzar" y "Acerca de" estilizados
+- Panel informativo con overlay semitransparente
+
+### Gameplay
+- Panel lateral Clash Royale con chips informativos
+- Camino verde con flujo animado
+- Torres con efectos glow según tipo
+- Enemigos con barras de vida modernas
+- Sistema de partículas en acción
+
+### Efectos Especiales
+- Countdown 3-2-1 con diseño impactante
+- Proyectiles de artillería con estela
+- Explosiones multicapa con ondas de choque
+- Banners animados de oleadas
 
 ---
 
@@ -436,5 +555,11 @@ Este proyecto está bajo la Licencia BSD-3-Clause. Ver el archivo `LICENSE` para
 </p>
 
 <p align="center">
-  Hecho con ❤️ usando Haskell y Python
+  <img src="https://img.shields.io/badge/Made%20with-Haskell-5D4F85?style=flat-square&logo=haskell" />
+  <img src="https://img.shields.io/badge/UI-Pygame-3776AB?style=flat-square&logo=python" />
+  <img src="https://img.shields.io/badge/Graphics-Next%20Gen-00D9FF?style=flat-square" />
+</p>
+
+<p align="center">
+  Hecho con ❤️ y programación funcional
 </p>
