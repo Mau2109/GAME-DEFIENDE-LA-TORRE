@@ -70,6 +70,16 @@
   (major1) == 1 && (major2) <  2 || \
   (major1) == 1 && (major2) == 2 && (minor) <= 5)
 #endif /* MIN_VERSION_text */
+/* package vector-0.12.3.1 */
+#ifndef VERSION_vector
+#define VERSION_vector "0.12.3.1"
+#endif /* VERSION_vector */
+#ifndef MIN_VERSION_vector
+#define MIN_VERSION_vector(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  12 || \
+  (major1) == 0 && (major2) == 12 && (minor) <= 3)
+#endif /* MIN_VERSION_vector */
 
 /* tool gcc-11 */
 #ifndef TOOL_VERSION_gcc
@@ -163,10 +173,10 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_PACKAGE_KEY
-#define CURRENT_PACKAGE_KEY "defiende-la-torre-0.1.0.0-4WNT4QaKtnH1ToBweRobI0"
+#define CURRENT_PACKAGE_KEY "defiende-la-torre-0.1.0.0-KMTcw1GpYZnKPUkvOUy0aL"
 #endif /* CURRENT_packageKey */
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "defiende-la-torre-0.1.0.0-4WNT4QaKtnH1ToBweRobI0"
+#define CURRENT_COMPONENT_ID "defiende-la-torre-0.1.0.0-KMTcw1GpYZnKPUkvOUy0aL"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

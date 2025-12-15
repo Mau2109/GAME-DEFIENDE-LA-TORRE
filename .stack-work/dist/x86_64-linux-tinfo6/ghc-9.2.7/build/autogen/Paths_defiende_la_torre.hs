@@ -43,7 +43,7 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 bindir     = "/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/install/x86_64-linux-tinfo6/027eb0bada907b5dd8e5f0f3ffeef3cce1dc8100bbd96c778d8df9f4560b3aee/9.2.7/bin"
-libdir     = "/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/install/x86_64-linux-tinfo6/027eb0bada907b5dd8e5f0f3ffeef3cce1dc8100bbd96c778d8df9f4560b3aee/9.2.7/lib/x86_64-linux-ghc-9.2.7/defiende-la-torre-0.1.0.0-4WNT4QaKtnH1ToBweRobI0"
+libdir     = "/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/install/x86_64-linux-tinfo6/027eb0bada907b5dd8e5f0f3ffeef3cce1dc8100bbd96c778d8df9f4560b3aee/9.2.7/lib/x86_64-linux-ghc-9.2.7/defiende-la-torre-0.1.0.0-KMTcw1GpYZnKPUkvOUy0aL"
 dynlibdir  = "/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/install/x86_64-linux-tinfo6/027eb0bada907b5dd8e5f0f3ffeef3cce1dc8100bbd96c778d8df9f4560b3aee/9.2.7/lib/x86_64-linux-ghc-9.2.7"
 datadir    = "/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/install/x86_64-linux-tinfo6/027eb0bada907b5dd8e5f0f3ffeef3cce1dc8100bbd96c778d8df9f4560b3aee/9.2.7/share/x86_64-linux-ghc-9.2.7/defiende-la-torre-0.1.0.0"
 libexecdir = "/home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/install/x86_64-linux-tinfo6/027eb0bada907b5dd8e5f0f3ffeef3cce1dc8100bbd96c778d8df9f4560b3aee/9.2.7/libexec/x86_64-linux-ghc-9.2.7/defiende-la-torre-0.1.0.0"

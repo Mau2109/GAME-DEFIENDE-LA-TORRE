@@ -1,20 +1,20 @@
 /home/mauricio/.stack/programs/x86_64-linux/ghc-tinfo6-9.2.7/lib/ghc-9.2.7/include/ghcversion.h:
   hash: d590b76d2d5f98f01894882dc106d920a101f52edb6a09b9a7f8dc701b075565
 ? /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/dist/x86_64-linux-tinfo6/ghc-9.2.7/build/autogen/Paths_defiende_la_torre.hs
-: hash: d97459a84813a74b2e20366646012ea86046a5fe0ad9373b2c07123904f92b00
+: hash: 015f3d142de86751bef4a8abd361ee2bb3f12aa819519abce7d9fbdcd2351a11
 ? /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/.stack-work/dist/x86_64-linux-tinfo6/ghc-9.2.7/build/autogen/cabal_macros.h
-: hash: 4d3b214415e1e0fea4922722e6dfa37677e358a117d43a829fe62b85b0e04860
+: hash: a168ab393400fde8b90b67ee6b96eea66997f3affa24fa2dd088e9c4388eadf1
 /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/defiende-la-torre.cabal:
-  hash: f9e7010a5529cde619c4d5de7e6e44dad078bff06e01a1dede4cbb597505ae56
+  hash: 0ebfc9740b505bf280fac1c0ec43407ddcb7a8c529a1839ba7de28a63be1ef93
 /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/package.yaml:
-  hash: 71c9d85d1bd5069065520722c7cccadd7ec6c96c6179e5d252aed62b1d27d136
+  hash: a8c95f5afecae0e02149afc513d9788a432bdb469853cd95c2d3574b7ab823ee
 /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Generador.hs:
   hash: ec1daf669df7c8e117ce4219f0d51cc0a9636d55c49564c840f484ef63f1ec5e
 /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Main.hs:
-  hash: 4bd3f7cb5d9efcb4acdbc6f00ec432fdd013125d1ddbfe1bc6f171613a17d94e
+  hash: f8dacacff543987c3899f05242c6be3952a947bdb42a2b8d4542908534c7bede
 /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Simulacion.hs:
-  hash: 4e8e69bdfa22ce925b25c262ac9b5db0886608f9ced3514bbd20ed78faafd0ff
+  hash: 756253760962d5b0d4c37f3a7408f0c415dac46faa45f599ac47344e264f2215
 /home/mauricio/Documentos/septimo semestre/Programacion_Funcional/Defiende la torre/src/Tipos.hs:
-  hash: 1c702eb1b884905b811e51d3954b50ad0e12ff8f3b27ba9774072b80ad6ddc6d
+  hash: bc0177505ac1f652f483af2ebf6b77a89206486b06905c343382342fad61b668
 /usr/include/stdc-predef.h:
   hash: cb08cd5d4cc059a90833ac48a284d25016e8d56ded8ad4cd98d8ac59cc5053f3

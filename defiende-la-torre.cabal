@@ -28,6 +28,7 @@ library
     , containers
     , random
     , text
+    , vector
   default-language: Haskell2010
 
 executable defiende
@@ -47,4 +48,5 @@ executable defiende
     , containers
     , random
     , text
+    , vector
   default-language: Haskell2010

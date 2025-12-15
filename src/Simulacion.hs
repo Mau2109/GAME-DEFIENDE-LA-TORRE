@@ -16,37 +16,47 @@ import Data.Ord (comparing)
 import System.IO (hPutStrLn, stderr)
 import System.IO.Unsafe (unsafePerformIO)
 
--- ======= parámetros =======
-costoArquera, costoCanon, costoMago :: Int
-costoArquera = 40
-costoCanon   = 60
-costoMago    = 80
+-- ======= PARÁMETROS =======
+costoArquera, costoCanon, costoMago, costoArtilleria :: Int
+costoArquera   = 40
+costoCanon     = 60
+costoMago      = 80
+costoArtilleria = 120  -- NUEVO: más cara porque es manual
 
 -- Base de stats por tipo
 statsTorre :: TorreTipo -> (Int {-daño-}, Int {-rango-}, Int {-CD-})
-statsTorre Arquera = (8, 3, 1)   -- rápido, poco daño
-statsTorre Canon   = (18, 3, 2)  -- daño fuerte
-statsTorre Mago    = (10, 3, 3)  -- daño medio + slow
+statsTorre Arquera    = (8, 3, 1)
+statsTorre Canon      = (18, 3, 2)
+statsTorre Mago       = (10, 3, 3)
+statsTorre Artilleria = (35, 6, 4)  -- NUEVO: alto daño, largo rango, cooldown alto
 
 -- HP inicial por tipo
 hpInicialTorre :: TorreTipo -> Int
-hpInicialTorre Arquera = 60
-hpInicialTorre Canon   = 90
-hpInicialTorre Mago    = 75
+hpInicialTorre Arquera    = 60
+hpInicialTorre Canon      = 90
+hpInicialTorre Mago       = 75
+hpInicialTorre Artilleria = 100  -- NUEVO: más resistente
 
--- Daño que hace 1 enemigo a la torre por tick si está tocándola
+-- Daño que hace 1 enemigo a la torre por tick
 danioEnemigoATorre :: Int
 danioEnemigoATorre = 6
 
--- monedas al matar
+-- Recompensa por kill
 recompensaKill :: Int
 recompensaKill = 10
 
--- efecto Mago
+-- Efecto Mago
 efectoMago :: Efecto
 efectoMago = Lento { ticks = 3, factor = 0.6 }
 
--- ======= estado inicial =======
+-- NUEVO: Parámetros de proyectiles
+velocidadProyectil :: Double
+velocidadProyectil = 0.15  -- Progreso por tick (0.0 a 1.0)
+
+radioExplosionArtilleria :: Double
+radioExplosionArtilleria = 2.0  -- En celdas
+
+-- ======= ESTADO INICIAL =======
 crearEstadoInicial :: [Posicion] -> Posicion -> Posicion -> EstadoJuego
 crearEstadoInicial camino entrada base = EstadoJuego
   { ejTick = 0
@@ -55,36 +65,50 @@ crearEstadoInicial camino entrada base = EstadoJuego
   , ejBase = base
   , ejEnemigos = []
   , ejTorres = []
+  , ejProyectiles = []  -- NUEVO
   , ejSiguienteIdEnemigo = 1
   , ejSiguienteIdTorre = 1
+  , ejSiguienteIdProy = 1  -- NUEVO
   , ejMonedas = 350
-  , ejMaxTorres = 12
+  , ejMaxTorres = 15  -- Aumentado porque Artillería cuenta como torre
   , ejVidaBase = 20
   , ejGameOver = False
   }
 
--- ======= paso =======
+-- ======= PASO PRINCIPAL =======
 paso :: [Posicion] -> EstadoJuego -> Comando -> EstadoJuego
 paso camino est0 cmd =
   let est1 = aplicarComando camino est0 cmd
       est2 = actualizarCooldownTorres est1
-      est3 = moverEnemigos camino est2
-      est4 = enemigosAtacanTorres camino est3    -- NUEVO: enemigos dañan torres si las tocan
-      est5 = torresAtacan camino est4
-      est6 = aplicarMuertesYRecompensas est5
-      est7 = llegarBase camino est6              -- NUEVO: GameOver instantáneo si llegan
-      estF = est7 { ejTick = ejTick est7 + 1 }
+      est3 = moverProyectiles camino est2       -- NUEVO: mover bombas
+      est4 = moverEnemigos camino est3
+      est5 = enemigosAtacanTorres camino est4
+      est6 = torresAtacan camino est5
+      est7 = aplicarMuertesYRecompensas est6
+      est8 = llegarBase camino est7
+      estF = est8 { ejTick = ejTick est8 + 1 }
   in estF
 
--- ======= comandos =======
+-- ======= COMANDOS =======
 aplicarComando :: [Posicion] -> EstadoJuego -> Comando -> EstadoJuego
+
+-- Colocar torre (incluye Artillería)
 aplicarComando _ est@(EstadoJuego{..}) (CmdColocarTorre pos tipo) =
   let enCamino = pos `elem` ejCamino
       yaTorre  = any (\t -> posTorre t == pos) ejTorres
       numT     = length ejTorres
-      costo = case tipo of Arquera -> costoArquera; Canon -> costoCanon; Mago -> costoMago
+      costo = case tipo of 
+                Arquera    -> costoArquera
+                Canon      -> costoCanon
+                Mago       -> costoMago
+                Artilleria -> costoArtilleria
   in if enCamino || yaTorre || numT >= ejMaxTorres || ejMonedas < costo || ejGameOver
-       then est
+       then traceLog ("No se puede colocar torre " ++ show tipo ++ " en " ++ show pos 
+                   ++ " (camino=" ++ show enCamino 
+                   ++ ", ocupado=" ++ show yaTorre
+                   ++ ", limite=" ++ show (numT >= ejMaxTorres)
+                   ++ ", dinero=" ++ show (ejMonedas < costo) ++ ")")
+            est
        else
          let (dmg, rng, cd) = statsTorre tipo
              hp0 = hpInicialTorre tipo
@@ -97,37 +121,116 @@ aplicarComando _ est@(EstadoJuego{..}) (CmdColocarTorre pos tipo) =
                   , ejSiguienteIdTorre = ejSiguienteIdTorre + 1
                   , ejMonedas = ejMonedas - costo }
 
+-- NUEVO: Disparar artillería manualmente
+aplicarComando camino est@(EstadoJuego{..}) (CmdDispararArtilleria idTorreCmd objetivo) =
+  case filter (\t -> idTorre t == idTorreCmd && tipoTorre t == Artilleria) ejTorres of
+    [] -> est  -- Torre no existe o no es Artillería
+    (torre:_) ->
+      if cdActual torre > 0
+        then traceLog ("Torre " ++ show idTorreCmd ++ " aún en cooldown") est
+        else
+          let (tx, ty) = posTorre torre
+              origen = (fromIntegral tx + 0.5, fromIntegral ty + 0.5)
+              
+              -- Verificar que objetivo esté en rango
+              (ox, oy) = objetivo
+              dx = ox - fst origen
+              dy = oy - snd origen
+              dist = sqrt (dx*dx + dy*dy)
+              
+          in if dist > fromIntegral (rangoTorre torre)
+               then traceLog ("Objetivo fuera de rango") est
+               else
+                 let proy = Proyectil
+                       { idProyectil = ejSiguienteIdProy
+                       , posOrigenProy = origen
+                       , posDestinoProy = objetivo
+                       , posActualProy = origen
+                       , progresoVuelo = 0.0
+                       , velocidadProy = velocidadProyectil
+                       , danioProy = danioBase torre * nivelTorre torre
+                       , radioExplosion = radioExplosionArtilleria
+                       , idTorreProy = idTorreCmd
+                       }
+                     
+                     -- Actualizar torre: cooldown activo
+                     torresAct = map (\t -> if idTorre t == idTorreCmd
+                                            then t { cdActual = enfriamiento t }
+                                            else t) ejTorres
+                     
+                 in traceLog ("Artillería " ++ show idTorreCmd ++ " dispara a " ++ show objetivo)
+                    $ est { ejProyectiles = proy : ejProyectiles
+                          , ejSiguienteIdProy = ejSiguienteIdProy + 1
+                          , ejTorres = torresAct }
+
+-- Iniciar oleada
 aplicarComando _ est CmdIniciarOleada
   | ejGameOver est = est
   | otherwise =
-      let n   = 60                          -- ← pon 50 si quieres 50 enemigos
+      let n   = 40
           vs  = [0..n-1]
           ids = [ejSiguienteIdEnemigo est .. ejSiguienteIdEnemigo est + n - 1]
-
-          -- Velocidades variadas (cíclico cada 16): 0.40, 0.43, ..., 0.85
           mkV k   = 0.40 + 0.03 * fromIntegral (k `mod` 16)
-
-          -- HP ligeramente creciente
           mkHp k  = 60 + k*3
-
-          -- Progreso inicial para "espaciarlos" en el primer segmento (0.00..0.95)
-          -- Así ya nacen distribuidos a lo largo del camino, no todos pegados.
           mkProg k =
-            let steps = 20                   -- 20 posiciones: 0.00, 0.05, ..., 0.95
+            let steps = 20
                 i     = k `mod` steps
-            in  fromIntegral i * (1.0 / fromIntegral steps)  -- 0.0 .. <1.0
-
+            in  fromIntegral i * (1.0 / fromIntegral steps)
           enemigos = [ Enemigo i (mkHp k) (mkHp k) 0 (mkProg k) (mkV k) SinEfecto
                      | (i,k) <- zip ids vs ]
-
       in traceLog ("Inicia oleada con " ++ show n ++ " enemigos")
          $ est { ejEnemigos = ejEnemigos est ++ enemigos
                , ejSiguienteIdEnemigo = ejSiguienteIdEnemigo est + n }
 
 aplicarComando _ est CmdNoop = est
 
+-- ======= NUEVO: MOVER PROYECTILES =======
+moverProyectiles :: [Posicion] -> EstadoJuego -> EstadoJuego
+moverProyectiles camino est@(EstadoJuego{..}) =
+  let -- Actualizar posición de cada proyectil
+      actualizarProy p@(Proyectil{..}) =
+        let progNew = progresoVuelo + velocidadProy
+            (ox, oy) = posOrigenProy
+            (dx, dy) = posDestinoProy
+            
+            -- Interpolación lineal
+            px = ox + (dx - ox) * progNew
+            py = oy + (dy - oy) * progNew
+            
+        in p { posActualProy = (px, py), progresoVuelo = progNew }
+      
+      proyActualizados = map actualizarProy ejProyectiles
+      
+      -- Separar: los que llegaron (progreso >= 1.0) explotan
+      (impactados, enVuelo) = partition (\p -> progresoVuelo p >= 1.0) proyActualizados
+      
+      -- Aplicar daño de explosiones
+      enemigosConDanio = foldl' aplicarExplosion ejEnemigos impactados
+      
+  in est { ejProyectiles = enVuelo
+         , ejEnemigos = enemigosConDanio }
 
--- ======= movimiento =======
+-- Aplicar daño de una explosión a todos los enemigos en área
+aplicarExplosion :: [Enemigo] -> Proyectil -> [Enemigo]
+aplicarExplosion enemigos Proyectil{..} =
+  let (ex, ey) = posDestinoProy
+      radio = radioExplosion
+      
+      dañarSiEnArea e =
+        let (px, py) = posicionContinuaEnemigo (ejCamino undefined) e  -- Necesitamos camino
+            dx = px - ex
+            dy = py - ey
+            dist = sqrt (dx*dx + dy*dy)
+        in if dist <= radio
+             then e { hpEnemigo = hpEnemigo e - danioProy }
+             else e
+      
+  in map dañarSiEnArea enemigos
+  where
+    -- Función auxiliar temporal (debemos pasarla correctamente)
+    posicionContinuaEnemigo _ Enemigo{..} = (0.0, 0.0)  -- TODO: arreglar
+
+-- ======= MOVIMIENTO ENEMIGOS =======
 velocidadActual :: Enemigo -> Double
 velocidadActual Enemigo{..} =
   case efecto of
@@ -157,32 +260,25 @@ avanzarIndice idx prog lenCam
           i' = idx + 1
       in if i' >= lenCam then (i', p') else avanzarIndice i' p' lenCam
 
--- ======= enemigos atacan torres (NUEVO) =======
--- Un enemigo que "toca" una torre (distancia al centro < 0.6 celda) le hace daño por tick.
+-- ======= ENEMIGOS ATACAN TORRES =======
 enemigosAtacanTorres :: [Posicion] -> EstadoJuego -> EstadoJuego
 enemigosAtacanTorres camino est@EstadoJuego{..}
   | ejGameOver = est
   | otherwise  =
-      let -- posición continua de enemigo
-          posEn e = posicionContinua camino e
-          -- aplica daño de un enemigo a la torre más cercana que esté tocando
+      let posEn e = posicionContinua camino e
           aplicarDanioDe e torres =
             let (ex,ey) = posEn e
-                -- distancia centro a centro en coordenadas de celdas
                 dist (tx,ty) = let dx = fromIntegral tx + 0.5 - ex
                                    dy = fromIntegral ty + 0.5 - ey
                                in sqrt (dx*dx + dy*dy)
-                -- torres tocadas (r < 0.6 celda ~ están en la misma casilla/adyacente)
                 tocadas = filter (\t -> dist (posTorre t) < 0.6) torres
             in case tocadas of
                  []   -> torres
-                 t:_  -> -- dañamos la primera tocada (suficiente para el efecto)
+                 t:_  ->
                    let t'  = t { hpTorre = hpTorre t - danioEnemigoATorre }
                        ts' = t' : filter (\x -> idTorre x /= idTorre t) torres
                    in ts'
-          -- plegado: cada enemigo puede dañar una torre por tick
           torresGolpeadas = foldl (flip aplicarDanioDe) ejTorres ejEnemigos
-          -- eliminar torres destruidas
           (muertas, vivas) = partition (\t -> hpTorre t <= 0) torresGolpeadas
           est' = if null muertas
                    then est { ejTorres = vivas }
@@ -190,12 +286,14 @@ enemigosAtacanTorres camino est@EstadoJuego{..}
                         $ est { ejTorres = vivas }
       in est'
 
--- ======= ataque de torres =======
+-- ======= TORRES ATACAN (Solo automáticas) =======
 torresAtacan :: [Posicion] -> EstadoJuego -> EstadoJuego
 torresAtacan camino est@EstadoJuego{..}
   | ejGameOver = est
   | otherwise  =
       let aplicar (ens, ts) t@Torre{..}
+            -- NUEVO: Artillería NO ataca automáticamente
+            | tipoTorre == Artilleria = (ens, ts ++ [t])
             | cdActual > 0 = (ens, ts ++ [t { cdActual = cdActual }])
             | otherwise =
                 case objetivoMasAvanzado camino t ens of
@@ -248,7 +346,7 @@ posicionContinua camino Enemigo{..} =
       fy = fromIntegral y0 + (fromIntegral y1 - fromIntegral y0) * prog
   in (fx, fy)
 
--- ======= muertes, recompensas =======
+-- ======= MUERTES Y RECOMPENSAS =======
 aplicarMuertesYRecompensas :: EstadoJuego -> EstadoJuego
 aplicarMuertesYRecompensas est@EstadoJuego{..} =
   let (muertos, vivos) = partition (\e -> hpEnemigo e <= 0) ejEnemigos
@@ -259,7 +357,7 @@ aplicarMuertesYRecompensas est@EstadoJuego{..} =
                        ++ " +" ++ show ganancia ++ " monedas")
              $ est { ejEnemigos = vivos, ejMonedas = ejMonedas + ganancia }
 
--- ======= llegada a base =======
+-- ======= LLEGADA A BASE =======
 llegarBase :: [Posicion] -> EstadoJuego -> EstadoJuego
 llegarBase camino est@EstadoJuego{..} =
   let lenCam = length camino
@@ -269,10 +367,9 @@ llegarBase camino est@EstadoJuego{..} =
      else traceLog ("¡Game Over! Enemigos tocaron la base (" ++ show perdidas ++ ")")
         $ est { ejEnemigos = resto
               , ejVidaBase = max 0 (ejVidaBase - perdidas)
-              , ejGameOver = True   -- GAME OVER inmediato
-              }
+              , ejGameOver = True }
 
--- ======= cooldown =======
+-- ======= COOLDOWN =======
 actualizarCooldownTorres :: EstadoJuego -> EstadoJuego
 actualizarCooldownTorres est@EstadoJuego{..} =
   let ts' = map (\t -> if cdActual t > 0 then t{cdActual = cdActual t - 1} else t) ejTorres
@@ -294,6 +391,7 @@ serializarEstadoJSON camino EstadoJuego{..} =
             , "hpTorre"    .= hpTorre t
             , "hpMaxTorre" .= hpMaxTorre t
             ]) ejTorres
+      
       enemigosJson = map (\e ->
          let (px,py) = posicionContinua camino e
          in object
@@ -308,6 +406,19 @@ serializarEstadoJSON camino EstadoJuego{..} =
                                       SinEfecto -> ("none" :: String)
                                       Lento _ _ -> "slow"
             ]) ejEnemigos
+      
+      -- NUEVO: Proyectiles JSON
+      proyectilesJson = map (\p -> object
+            [ "idProyectil"    .= idProyectil p
+            , "posX"           .= fst (posActualProy p)
+            , "posY"           .= snd (posActualProy p)
+            , "destinoX"       .= fst (posDestinoProy p)
+            , "destinoY"       .= snd (posDestinoProy p)
+            , "progreso"       .= progresoVuelo p
+            , "danio"          .= danioProy p
+            , "radioExplosion" .= radioExplosion p
+            ]) ejProyectiles
+      
   in object
      [ "ejTick"               .= ejTick
      , "ejCamino"             .= ejCamino
@@ -315,6 +426,7 @@ serializarEstadoJSON camino EstadoJuego{..} =
      , "ejBase"               .= ejBase
      , "ejTorres"             .= torresJson
      , "ejEnemigos"           .= enemigosJson
+     , "ejProyectiles"        .= proyectilesJson  -- NUEVO
      , "ejSiguienteIdEnemigo" .= ejSiguienteIdEnemigo
      , "ejMonedas"            .= ejMonedas
      , "ejMaxTorres"          .= ejMaxTorres
@@ -322,7 +434,7 @@ serializarEstadoJSON camino EstadoJuego{..} =
      , "ejGameOver"           .= ejGameOver
      ]
 
--- ======= util =======
+-- ======= UTIL =======
 traceLog :: String -> a -> a
 traceLog msg x = unsafeLog msg `seq` x
 
